@@ -1,4 +1,4 @@
-using Livraria;
+using Livraria.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
