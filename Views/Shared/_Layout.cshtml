@@ -15,7 +15,7 @@
 		<div class="header">
 			<div class="main-header">
 				<div class="d-flex align-items-center" style="width: 40%;">
-					<h1><a href="home.html" style="cursor: pointer; text-decoration: none;">Livraria</a></h1>
+					<h1><a asp-controller="Home" asp-action="Index" class="text-decoration-none" style="cursor: pointer;">Livraria</a></h1>
 				</div>
 				<div class="d-flex align-items-center justify-content-around" style="width: 40%;">
 					<a href="sobrenos.html">Sobre nós</a>
@@ -46,6 +46,7 @@
 				</ul>
 			</div>
 			<a style="color: white;" href="produtos.html">Mais Vendidos</a>
+			<a style="color: white;" asp-action="Index" asp-controller="Livros">Todos os Livros</a>
 			<a style="color: white;" href="produtos.html">Livros Recomendados</a>
 			<div class="dropdown">
 				<button style="background-color: transparent; border: 0; padding: 0;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
