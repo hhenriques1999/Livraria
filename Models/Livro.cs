@@ -7,6 +7,8 @@ namespace Livraria.Models
         [Key]
         public int Id { get; set; }
         public string? Nome { get; set; }
+
+        public string? Autor { get; set; }
         public float Preco { get; set; }
         public string? Capa { get; set; }
         [Display(Name = "Quantidade de Vendas")]
