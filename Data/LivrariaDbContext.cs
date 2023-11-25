@@ -1,7 +1,7 @@
 ﻿using Livraria.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Livraria
+namespace Livraria.Data
 {
     public class LivrariaDbContext : DbContext
     {
