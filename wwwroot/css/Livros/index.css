@@ -1,0 +1,8 @@
+﻿.book-cover {
+    width: 80px; /* Adjust the size as needed */
+    height: auto;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}

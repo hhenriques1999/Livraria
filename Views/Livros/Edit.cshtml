@@ -4,13 +4,15 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<script src="~/js/Livros/edit.js"></script>
+
+<h1>Editar</h1>
 
 <h4>Livro</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -23,6 +25,20 @@
                 <input asp-for="Preco" class="form-control" />
                 <span asp-validation-for="Preco" class="text-danger"></span>
             </div>
+
+            <!-- Current Cover Image -->
+            <div class="form-group">
+                <label>Capa Atual</label>
+                <img id="resizedImage" src="@Model.Capa" alt="Capa do Livro" style="max-width:160px; max-height:220px;" />
+            </div>
+
+            <!-- File Input for New Cover Image -->
+            <div class="form-group">
+                <label for="imageUpload" class="control-label">Upload New Cover Image</label>
+                <input type="file" id="imageUpload" name="Capa" accept="image/*" />
+                <input type="hidden" asp-for="Capa" id="base64Image" name="Capa" />
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
