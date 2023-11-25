@@ -18,7 +18,7 @@ function listarBookVendas(id, array) {
     span.innerHTML = '';
 
     for (let i = 0; i < 4; i++) {
-        span.innerHTML += '<div class="book-container"><img src="' + array[i].imagem + '"><div style="padding: 15px;"><h5>' + array[i].nome + '</h5><p>' + array[i].autor + '</p><br><div style="position: absolute; top: 80%;"><p> R$ ' + array[i].preco + '</p><button onclick="getData(' + array[i].id + ')" >Ver Item</button></div></div>'
+        span.innerHTML += '<div class="book-container"><img src="' + array[i].imagem + '"><div style="padding: 15px;"><h5>' + array[i].nome + '</h5><p>' + array[i].autor + '</p><br><div style="position: absolute; top: 80%;"><p> R$ ' + array[i].preco + '</p><button class="btn btn-primary" onclick="getData(' + array[i].id + ')" >Ver Item</button></div></div>'
     }
 }
 listarBookVendas('mais-vendidos', book);
