@@ -1,5 +1,6 @@
 ﻿@{
 	ViewData["Title"] = "Home Page";
+	var livrosMaisVendidos = ViewData["LivrosMaisVendidos"] as List<Livro>;
 }
 
 <link rel="stylesheet" href="~/css/home.css" />
@@ -8,11 +9,36 @@
 	<div class="header-carrousel">
 		<img src="~/img/books3.jpg" width="100%">
 	</div>
-	<div class="mais-vendidos">
+	<div class="container-livros">
 		<h3>Mais Vendidos</h3>
-		<div id="mais-vendidos" class="book-carrousel"></div>
+		<div class="book-carrousel">
+            @if (livrosMaisVendidos != null)
+            {
+                <div class="row g-3">
+                    @foreach (var livro in livrosMaisVendidos)
+                    {
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <img src="@livro.Capa" class="card-img-top" alt="@livro.Nome">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">@livro.Nome</h5>
+                                    @*<!-- Uncomment if author info is needed
+                                    <p class="card-text">@livro.Autor</p>
+                                    -->*@
+                                    <div class="mt-auto">
+                                        <p class="card-text">@livro.Preco</p>
+                                        <a href="@Url.Action("Details", "Livros", new { id = livro.Id })" class="btn btn-primary stretched-link">Ver Item</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+		</div>
 	</div>
-	<div class="mais-vendidos">
+	<div class="container-livros">
 		<h3>Melhores Avaliados</h3>
 		<div id="mais-avaliados" class="book-carrousel"></div>
 	</div>

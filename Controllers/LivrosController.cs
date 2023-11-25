@@ -56,7 +56,7 @@ namespace Livraria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Preco,Capa")] Livro livro)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Preco,Capa,QtdVendas")] Livro livro)
         {
             if (ModelState.IsValid)
             {
@@ -88,8 +88,15 @@ namespace Livraria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Preco,Capa")] Livro livro)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Preco,Capa,QtdVendas")] Livro livro)
         {
+            var livroVelho = _context.Livros.AsNoTracking().First(p => p.Id == id);
+
+            if (string.IsNullOrEmpty(livro.Capa))
+            {
+                livro.Capa = livroVelho.Capa;
+            }
+
             if (id != livro.Id)
             {
                 return NotFound();

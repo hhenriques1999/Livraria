@@ -60,11 +60,17 @@
 .header-carrousel img {
     width: 100%;
     object-fit: cover;
-    height: 470px;
+    height: 20vh;
 }
 
 .container {
     margin: 75px 30%;
+}
+
+.container-livros {
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 5vh;
 }
 
 .book-carrousel {
