@@ -78,10 +78,8 @@
     background-color: rgb(237 235 235);
     border-radius: 20px;
     display: flex;
-    align-items: stretch;
-    padding: 35px;
+    padding: 5vh;
     justify-content: space-around;
-    height: 500px;
 }
 
 .book-container {
