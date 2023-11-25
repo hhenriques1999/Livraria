@@ -1,0 +1,34 @@
+.container{
+    margin: 75px 30%;
+}
+.book-carrousel{
+    width: 100%;
+    background-color: rgb(237 235 235);
+    border-radius: 20px;
+    display: flex;
+    padding: 35px;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 13%;
+}
+.book-container{
+    border-radius: 10px;
+    background-color: white;
+    width: 180px;
+    position: relative;
+    height: 488px;
+    margin-bottom: 50px;
+}
+.book-container a{
+    background-color: rgb(84, 205, 253);
+    color: white;
+    border: 0;
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.book-container img{
+    border-radius: 10px;
+    height: 235px;
+    width: 100%;
+}

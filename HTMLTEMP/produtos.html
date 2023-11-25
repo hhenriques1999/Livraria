@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Livraria Home</title>
+        <link rel="stylesheet" href="produtos.css">
+        <link rel="stylesheet" href="header.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="./books.js"></script>
+        
+    </head>
+    <body>
+        <!--Começo Header-->
+        <div class="header">
+            <div class="main-header">
+                <div class="ds-flex" style="width: 40%;">
+                    <h1><a href="home.html" style="cursor: pointer; text-decoration: none;">Livraria</a></h1>
+                </div>
+                <div class="ds-flex" style="width: 40%; justify-content: space-around;">
+                    <a href="sobrenos.html">Sobre nós</a>
+                    <div>
+                        <label for="search-input">
+                            <i style="font-size: 18px;transform: translateX(35px);" class="fa fa-search" aria-hidden="true"></i>
+                        </label>
+                        <input id="search-input" class="header-input" type="text" name="input" placeholder="">
+                    </div>
+                    <a href="tela-login.html"><i class="fa fa-user-circle-o" aria-hidden="true"></i><br>Entrar</a>
+                    <a href="carrinho.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Carrinho</a>
+                </div>
+            </div>
+        </div>
+        <div class="secondary-header">
+            <div class="dropdown">
+                <button style="background-color: transparent; border: 0; padding: 0;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bars" aria-hidden="true"></i> Categorias
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="produtos.html">Ação</a></li>
+                  <li><a class="dropdown-item" href="produtos.html">Aventura</a></li>
+                  <li><a class="dropdown-item" href="produtos.html">Arquitetura</a></li>
+                  <li><a class="dropdown-item" href="produtos.html">Direito</a></li>
+                  <li><a class="dropdown-item" href="produtos.html">Economia</a></li>
+                  <li><a class="dropdown-item" href="produtos.html">Pedagogia</a></li>
+                  <li><a class="dropdown-item" style="color: orange;" href="produtos.html"><strong>Ver todos</strong></a></li>
+                </ul>
+              </div>
+            <a style="color: white;" href="produtos.html">Mais Vendidos</a>
+            <a style="color: white;" href="produtos.html">Livros Recomendados</a>
+            <div class="dropdown">
+                <button style="background-color: transparent; border: 0; padding: 0;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    Livros por Idioma
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="produtos.html">Inglês</a></li>
+                  <li><a class="dropdown-item" href="produtos.html">Espanhol</a></li>
+                  <li><a class="dropdown-item" href="produtos.html">Alemão</a></li>
+                  <li><a class="dropdown-item" href="produtos.html">Italiano</a></li>
+                  <li><a class="dropdown-item" href="produtos.html">Françês</a></li>
+                  <li><a class="dropdown-item" href="produtos.html">Japonês</a></li>
+                  <li><a class="dropdown-item" style="color: orange;" href="produtos.html"><strong>Ver todos</strong></a></li>
+                </ul>
+              </div>
+        </div>
+        <!--Final Header-->
+        <div class="container">
+            <div class="mais-vendidos">
+                <div id="mais-vendidos" class="book-carrousel"></div>
+            </div>
+        </div>
+        <script>
+            function listarBookVendas(id, array){
+                let span = document.getElementById(id);
+                span.innerHTML = '';
+
+                for (let i = 0; i < array.length; i++) {
+                    span.innerHTML += '<div class="book-container"><img src="' + array[i].imagem + '"><div style="padding: 15px;"><h5>' + array[i].nome + '</h5><p>' + array[i].autor + '</p><br><div style="position: absolute; top: 80%;"><p> R$ ' + array[i].preco + '</p><button onclick="getData(' + array[i].id+ ')" >Ver Item</button></div></div>'
+                }
+            }
+            listarBookVendas('mais-vendidos', book);
+
+            function getData(i){
+                localStorage.setItem("value", i);
+                window.location.href = "produto.html";
+            }
+        </script>
+    </body>
+</html>

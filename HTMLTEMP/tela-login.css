@@ -1,0 +1,14 @@
+.container{
+    margin: 75px 30%;
+}
+.botao-logar{
+    color: white;
+    background-color: rgb(84, 205, 253);
+    padding: 7px 30px;
+    border-radius: 5px;
+    border: 0;
+    text-decoration: none;
+    margin: auto;
+    display: block;
+    margin-bottom: 20px;
+}
