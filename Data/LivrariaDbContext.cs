@@ -10,6 +10,8 @@ namespace Livraria.Data
 		public DbSet<Livro> Livros { get; set; }
 
 		public DbSet<Avaliacao> Avaliacao { get; set; }
+
+		public DbSet<Carrinho> Carrinho { get; set; }
 	}
 
 }
