@@ -19,7 +19,23 @@ namespace Livraria.Controllers
 
         public IActionResult Index()
         {
-            ViewData["LivrosMaisVendidos"] = _context.Livros.OrderByDescending(p => p.QtdVendas).Take(5).ToList();
+            if (HttpContext.User.Identity != null)
+            {
+                if (HttpContext.User.Identity.IsAuthenticated)
+                {
+                    var usuario = _context.Users.FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name);
+                    if (usuario != null)
+                    {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                        string? idUsuario = usuario?.Id;
+                        bool? vendedor = usuario.Vendedor;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+                        ViewData["IdUsuario"] = idUsuario;
+                    }
+                }
+            }
+
+			ViewData["LivrosMaisVendidos"] = _context.Livros.OrderByDescending(p => p.QtdVendas).Take(5).ToList();
             ViewData["MelhoresAvaliados"] = _context.Livros.Include(p => p.Avaliacoes).OrderByDescending(p => p.Avaliacoes.Average(a => a.Estrelas)).ToList();
 
 			return View();
