@@ -2,60 +2,123 @@
 
 @{
 	ViewData["Title"] = "Index";
+	bool? vendedor = ViewData["Vendedor"] as bool?;
 }
 
-<h1>Index</h1>
 <link rel="stylesheet" href="~/css/Livros/index.css">
 
-<p>
-	<a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.Nome)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Autor)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Preco)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.QtdVendas)
-			</th>
-			<th>
-				Capa
-			</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model)
+
+
+<style>
+	.table-container {
+		margin-left: 5vw;
+		margin-right: 5vw;
+		margin-top: 5vh;
+	}
+</style>
+
+<div class="table-container">
+	<div class="d-flex flex-row justify-content-between">
+		<h3>
+			Catálogo de Livros
+		</h3>
+		@if (vendedor != null)
 		{
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.Nome)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Autor)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Preco)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.QtdVendas)
-				</td>
-				<td>
-					<img src="@item.Capa" class="book-cover" alt="Capa do Livro" />
-				</td>
-				<td>
-					<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-					<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-					<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-				</td>
-			</tr>
+			if (vendedor == true)
+			{
+				<a class="btn btn-primary" asp-action="Create">Adicionar Livro</a>
+			}
 		}
-	</tbody>
-</table>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Nome)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Autor)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Preco)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.QtdVendas)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Avaliacoes)
+				</th>
+				<th>
+					Capa
+				</th>
+				<th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.Nome)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Autor)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Preco)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.QtdVendas)
+					</td>
+					@if (item.Avaliacoes != null)
+					{
+						if (item.Avaliacoes.Count() > 0)
+						{
+							<td>
+								@item.Avaliacoes
+							</td>
+						}
+						else
+						{
+							<td>0</td>
+						}
+					}
+					else
+					{
+						<td>0</td>
+					}
+					<td>
+						<img src="@item.Capa" class="book-cover" alt="Capa do Livro" />
+					</td>
+					@if (vendedor != null)
+					{
+						if (vendedor == true)
+						{
+							<td>
+								<a asp-action="Edit" asp-route-id="@item.Id">Editar Livro</a> |
+								<a asp-action="Details" asp-route-id="@item.Id">Detalhes do Livro</a> |
+								<a asp-action="Delete" asp-route-id="@item.Id">Deletar Livro</a>
+							</td>
+						}
+						else
+						{
+							<td>
+								<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detalhes do Livro</a>
+								<br />
+								<button type="button" class="btn btn-danger">Adicionar ao carrinho</button>
+							</td>
+						}
+					}
+					else
+					{
+						<td>
+							<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detalhes do Livro</a>
+							<br />
+							<button type="button" class="btn btn-danger">Adicionar ao carrinho</button>
+						</td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

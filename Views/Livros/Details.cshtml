@@ -6,6 +6,7 @@
 @{
 	ViewData["Title"] = "Details";
 	string IdUsuario = ViewData["IdUsuario"] as string;
+	bool? vendedor = ViewData["Vendedor"] as bool?;
 }
 <div class="book-details-page">
 	<div class="book-details">
@@ -38,6 +39,19 @@
 							<p>Avaliação: @avaliacao.Estrelas estrelas</p>
 							<p>Comentário: @avaliacao.Comentario</p>
 						</div>
+
+						@if (SignInManager.IsSignedIn(User))
+						{
+							if (vendedor != null)
+							{
+								if (vendedor == true)
+								{
+									<form asp-action="Delete" asp-route-id="@avaliacao.Id" asp-controller="Avaliacaos" method="POST">
+										<button type="submit" class="btn btn-danger">Remover Avaliação</button>
+									</form>
+								}
+							}
+						}
 					}
 				}
 			</div>
