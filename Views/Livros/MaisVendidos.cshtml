@@ -1,0 +1,146 @@
+@model IEnumerable<Livraria.Models.Livro>
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Usuario> SignInManager
+
+@{
+	ViewData["Title"] = "Mais Vendidos";
+	bool? vendedor = ViewData["Vendedor"] as bool?;
+	string? idUsuario = ViewData["IdUsuario"] as string;
+}
+
+<link rel="stylesheet" href="~/css/Livros/index.css">
+
+<style>
+	.table-container {
+		margin-left: 5vw;
+		margin-right: 5vw;
+		margin-top: 5vh;
+	}
+</style>
+
+<div class="table-container">
+	<div class="d-flex flex-row justify-content-between">
+		<h3>
+			Catálogo de Livros Mais Vendidos - Top 10
+		</h3>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Nome)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Autor)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Preco)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.QtdVendas)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Avaliacoes)
+				</th>
+				<th>
+					Capa
+				</th>
+				<th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.Nome)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Autor)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Preco)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.QtdVendas)
+					</td>
+					@if (item.Avaliacoes != null)
+					{
+						if (item.Avaliacoes.Count() > 0)
+						{
+							<td>
+								@item.Avaliacoes
+							</td>
+						}
+						else
+						{
+							<td>0</td>
+						}
+					}
+					else
+					{
+						<td>0</td>
+					}
+					<td>
+						<img src="@item.Capa" class="book-cover" alt="Capa do Livro" />
+					</td>
+					@if (vendedor != null)
+					{
+						if (vendedor == true)
+						{
+							<td>
+								<a asp-action="Edit" asp-route-id="@item.Id">Editar Livro</a> |
+								<a asp-action="Details" asp-route-id="@item.Id">Detalhes do Livro</a> |
+								<a asp-action="Delete" asp-route-id="@item.Id">Deletar Livro</a>
+							</td>
+						}
+						else
+						{
+							<td>
+								<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detalhes do Livro</a>
+								<br />
+								@if (vendedor != true && SignInManager.IsSignedIn(User))
+								{
+									<form asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-idLivro="@item.Id" method="POST">
+										<input type="hidden" name="LivrosIds" value="@item.Id" />
+										<input type="hidden" name="IdUsuario" value="@idUsuario">
+										<button type="submit" class="btn btn-style">Adicionar ao carrinho</button>
+									</form>
+								}
+								else
+								{
+									if (vendedor == false || vendedor == null)
+									{
+										<a class="btn btn-style" asp-area="Identity" asp-page="/Account/Login">Adicionar ao carrinho</a>
+									}
+								}
+							</td>
+						}
+					}
+					else
+					{
+						<td>
+							<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detalhes do Livro</a>
+							<br />
+							@if (vendedor != true && SignInManager.IsSignedIn(User))
+								{
+									<form asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-idLivro="@item.Id" method="POST">
+										<input type="hidden" name="LivrosIds" value="@item.Id" />
+										<input type="hidden" name="IdUsuario" value="@idUsuario">
+										<button type="submit" class="btn btn-style">Adicionar ao carrinho</button>
+									</form>
+								}
+								else
+								{
+									if (vendedor == false || vendedor == null)
+									{
+										<a class="btn btn-style" asp-area="Identity" asp-page="/Account/Login">Adicionar ao carrinho</a>
+									}
+								}
+						</td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

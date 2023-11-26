@@ -8,9 +8,6 @@
         text-align: center;
     }
 
-    .search-icon {
-        transform: translateX(10px);
-    }
 }
 
 .main-header {
@@ -33,19 +30,22 @@
     margin-right: 1vw;
 }
 
-.search-icon {
-    font-size: 18px;
-    transform: translateX(35px);
-}
-
 .secondary-header button {
     background-color: transparent;
     border: none;
     padding: 0;
+    transition: background-color 0.3s ease; 
 }
+
+    .secondary-header button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
 
 .secondary-header a {
     color: white;
+    transition: color 0.3s ease; 
 }
 
-/* Additional styles as needed */
+    .secondary-header a:hover {
+        color: #ddd; 
+    }

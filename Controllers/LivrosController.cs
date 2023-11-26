@@ -45,6 +45,30 @@ namespace Livraria.Controllers
 						Problem("Entity set 'LivrariaDbContext.Livros'  is null.");
 		}
 
+		public async Task<IActionResult> MaisVendidos()
+		{
+			if (HttpContext.User.Identity != null)
+			{
+				if (HttpContext.User.Identity.IsAuthenticated)
+				{
+					var usuario = _context.Users.FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name);
+					if (usuario != null)
+					{
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+						string? idUsuario = usuario?.Id;
+						bool? vendedor = usuario.Vendedor;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+						ViewData["IdUsuario"] = idUsuario;
+						ViewData["Vendedor"] = vendedor;
+					}
+				}
+			}
+
+			return _context.Livros != null ?
+						View(await _context.Livros.OrderByDescending(l => l.QtdVendas).Take(10).ToListAsync()) :
+						Problem("Entity set 'LivrariaDbContext.Livros'  is null.");
+		}
+
 		// GET: Livros/Details/5
 		public async Task<IActionResult> Details(int? id)
 		{
