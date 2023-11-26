@@ -1,6 +1,7 @@
 ﻿using Livraria.Data;
 using Livraria.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Livraria.Controllers
@@ -18,9 +19,10 @@ namespace Livraria.Controllers
 
         public IActionResult Index()
         {
-            ViewData["LivrosMaisVendidos"] = _context.Livros.OrderBy(p => p.QtdVendas).Take(5).ToList();
+            ViewData["LivrosMaisVendidos"] = _context.Livros.OrderByDescending(p => p.QtdVendas).Take(5).ToList();
+            ViewData["MelhoresAvaliados"] = _context.Livros.Include(p => p.Avaliacoes).OrderByDescending(p => p.Avaliacoes.Average(a => a.Estrelas)).ToList();
 
-            return View();
+			return View();
         }
 
         public IActionResult SobreNos()
