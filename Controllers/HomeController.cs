@@ -23,6 +23,11 @@ namespace Livraria.Controllers
             return View();
         }
 
+        public IActionResult SobreNos()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
