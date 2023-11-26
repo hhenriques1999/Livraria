@@ -3,6 +3,7 @@ using System;
 using Livraria.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Livraria.Migrations
 {
     [DbContext(typeof(LivrariaDbContext))]
-    partial class LivrariaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231126204214_MudancasCarrinho2")]
+    partial class MudancasCarrinho2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

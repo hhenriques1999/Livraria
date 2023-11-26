@@ -3,6 +3,7 @@ using System;
 using Livraria.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Livraria.Migrations
 {
     [DbContext(typeof(LivrariaDbContext))]
-    partial class LivrariaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231126202812_MudancasCarrinho")]
+    partial class MudancasCarrinho
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,27 +49,6 @@ namespace Livraria.Migrations
                     b.ToTable("Avaliacao");
                 });
 
-            modelBuilder.Entity("Livraria.Models.Carrinho", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("IdUsuario")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("LivrosIds")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdUsuario");
-
-                    b.ToTable("Carrinho");
-                });
-
             modelBuilder.Entity("Livraria.Models.Livro", b =>
                 {
                     b.Property<int>("Id")
@@ -79,9 +60,6 @@ namespace Livraria.Migrations
 
                     b.Property<string>("Capa")
                         .HasColumnType("longtext");
-
-                    b.Property<int?>("CarrinhoId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasColumnType("longtext");
@@ -96,8 +74,6 @@ namespace Livraria.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CarrinhoId");
 
                     b.HasIndex("PedidoId");
 
@@ -344,23 +320,8 @@ namespace Livraria.Migrations
                     b.Navigation("Livro");
                 });
 
-            modelBuilder.Entity("Livraria.Models.Carrinho", b =>
-                {
-                    b.HasOne("Livraria.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("IdUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("Livraria.Models.Livro", b =>
                 {
-                    b.HasOne("Livraria.Models.Carrinho", null)
-                        .WithMany("Livros")
-                        .HasForeignKey("CarrinhoId");
-
                     b.HasOne("Livraria.Models.Pedido", null)
                         .WithMany("Livros")
                         .HasForeignKey("PedidoId");
@@ -424,11 +385,6 @@ namespace Livraria.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Livraria.Models.Carrinho", b =>
-                {
-                    b.Navigation("Livros");
                 });
 
             modelBuilder.Entity("Livraria.Models.Livro", b =>
