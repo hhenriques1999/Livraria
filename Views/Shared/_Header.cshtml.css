@@ -1,0 +1,49 @@
+﻿@media (max-width: 768px) {
+    .main-header, .secondary-header {
+        flex-direction: column;
+    }
+
+    .header-logo, .header-navigation {
+        width: 100%;
+        text-align: center;
+    }
+
+    .search-icon {
+        transform: translateX(10px);
+    }
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    width: 40%;
+}
+
+.header-navigation {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 4px;
+}
+
+.search-icon {
+    font-size: 18px;
+    transform: translateX(35px);
+}
+
+.secondary-header button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.secondary-header a {
+    color: white;
+}
+
+/* Additional styles as needed */

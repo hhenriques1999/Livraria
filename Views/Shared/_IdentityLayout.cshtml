@@ -1,7 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@inject SignInManager<Usuario> SignInManager
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -14,8 +11,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 </head>
 <body>
-	@await Html.PartialAsync("_Header")
-
 	<div>
 		<main role="main" class="pb-3">
 			@RenderBody()
@@ -23,11 +18,10 @@
 	</div>
 
 	<footer class="border-top footer text-muted">
-		<div>
+		<div style="margin-left: 2vw">
 			&copy; 2023 - Livraria - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 		</div>
 	</footer>
-
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
