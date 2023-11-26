@@ -129,8 +129,8 @@ namespace Livraria.Controllers
 			return View(livro);
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> AdicionarAvaliacao(int? id, Avaliacao avaliacao)
+		[HttpPost("/Livros/AdicionarAvaliacao/{id}")]
+		public async Task<IActionResult> AdicionarAvaliacao(int? id, [Bind("Estrelas, Comentario, IdUsuario, IdLivro")] Avaliacao avaliacao)
 		{
 			if (id == null)
 			{
