@@ -4,8 +4,8 @@
 @model Livraria.Models.Livro
 
 @{
-	ViewData["Title"] = "Details";
-	string IdUsuario = ViewData["IdUsuario"] as string;
+	ViewData["Title"] = "Detalhes do Livro";
+	string? IdUsuario = ViewData["IdUsuario"] as string;
 	bool? vendedor = ViewData["Vendedor"] as bool?;
 }
 <div class="book-details-page">

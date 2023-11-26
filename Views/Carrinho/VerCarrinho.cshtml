@@ -1,20 +1,64 @@
 ﻿@model Livraria.Models.Carrinho
 @{
+    ViewData["Title"] = "Carrinho";
 }
 
 <div class="container">
-	@if (Model.Livros != null)
-	{
-		if (Model.Livros.Count() != 0)
-		{
-			foreach (var livro in Model.Livros)
-			{
-				<div>Livro: @livro.Id | @livro.Nome</div>
-			}
-		}
-		else
-		{
-			<div>O seu carrinho está vazio ;(</div>
-		}
-	}
+    @if (Model.Livros != null && Model.Livros.Count() > 0)
+    {
+        var groupedLivros = Model.Livros
+        .GroupBy(l => l.Nome)
+        .Select(g => new { Livro = g.First(), Count = g.Count(), TotalPrice = g.Sum(l => l.Preco) });
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Autor</th>
+                    <th>Preço Unitário</th>
+                    <th>Quantidade</th>
+                    <th>Capa</th>
+                    <th>Total do Livro</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var group in groupedLivros)
+                {
+                    <tr>
+                        <td>@group.Livro.Nome</td>
+                        <td>@group.Livro.Autor</td>
+                        <td>R$ @group.Livro.Preco.ToString("0.00")</td>
+                        <td>@group.Count</td>
+                        <td>
+                            @if (!string.IsNullOrWhiteSpace(group.Livro.Capa))
+                            {
+                                <img src="@group.Livro.Capa" alt="Capa do livro" style="height: 100px;" />
+                            }
+                            else
+                            {
+                                <span>Sem imagem</span>
+                            }
+                        </td>
+                        <td>R$ @group.TotalPrice.ToString("0.00")</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" style="text-align: right;">Total Geral:</td>
+                    <td>R$ @groupedLivros.Sum(g => g.TotalPrice).ToString("0.00")</td>
+                </tr>
+                <tr>
+                    <td colspan="5"></td>
+                    <td style="text-align: right;">
+                        <button type="button" class="btn btn-success">Realizar Compra</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+    else
+    {
+        <div>O seu carrinho está vazio ;(</div>
+    }
 </div>
