@@ -19,13 +19,20 @@
 			<p>Preço: <strong>R$ @Model.Preco</strong></p>
 			<p>Vendas: @Model.QtdVendas</p>
 
-			@if (SignInManager.IsSignedIn(User))
+			@if (vendedor != true && SignInManager.IsSignedIn(User))
 			{
-				<a class="btn btn-style">Adicionar ao carrinho</a>
+				<form asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-idLivro="@Model.Id" method="POST">
+					<input type="hidden" name="LivrosIds" value="@Model.Id" />
+					<input type="hidden" name="IdUsuario" value="@IdUsuario">
+					<button type="submit" class="btn btn-style">Adicionar ao carrinho</button>
+				</form>
 			}
 			else
 			{
-				<a class="btn btn-style" asp-area="Identity" asp-page="/Account/Login">Adicionar ao carrinho</a>
+				if (vendedor == false || vendedor == null)
+				{
+					<a class="btn btn-style" asp-area="Identity" asp-page="/Account/Login">Adicionar ao carrinho</a>
+				}
 			}
 
 			<div class="rating-section">
@@ -35,7 +42,7 @@
 					foreach (var avaliacao in Model.Avaliacoes)
 					{
 						<div class="rating">
-							<p>Usuário: @avaliacao.Avaliador.Nome</p>
+							<p>Usuário: @avaliacao.Avaliador?.Nome</p>
 							<p>Avaliação: @avaliacao.Estrelas estrelas</p>
 							<p>Comentário: @avaliacao.Comentario</p>
 						</div>
@@ -47,7 +54,7 @@
 								if (vendedor == true)
 								{
 									<form asp-action="Delete" asp-route-id="@avaliacao.Id" asp-controller="Avaliacaos" method="POST">
-										<button type="submit" class="btn btn-danger">Remover Avaliação</button>
+										<button type="submit" class="btn btn-style">Remover Avaliação</button>
 									</form>
 								}
 							}
@@ -81,6 +88,7 @@
 							<label for="star-@i">&#9733;</label>
 						}
 					</div>
+
 
 					<textarea class="form-control" name="Comentario" placeholder="Adicione um comentário..."></textarea>
 					<button type="submit" class="btn btn-style">Enviar avaliação</button>

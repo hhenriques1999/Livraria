@@ -23,9 +23,8 @@
 }
 
 .stars {
-    direction: rtl; /* Right to left to enable proper star highlighting */
     font-size: 24px;
-    color: #ddd; /* Default color */
+    color: #ddd;
 }
 
     .stars input[type="radio"] {
@@ -34,13 +33,13 @@
 
     .stars label {
         cursor: pointer;
-        color: #ffd700; /* Gold color for stars */
+        color: #ffd700;
     }
 
         .stars label:hover,
         .stars label:hover ~ label,
         .stars input[type="radio"]:checked ~ label {
-            color: #ffed85; /* Lighter gold color on hover */
+            color: #ffed85;
         }
 
 textarea {

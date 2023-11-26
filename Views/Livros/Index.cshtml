@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<Livraria.Models.Livro>
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Usuario> SignInManager
 
 @{
 	ViewData["Title"] = "Index";
 	bool? vendedor = ViewData["Vendedor"] as bool?;
+	string? idUsuario = ViewData["IdUsuario"] as string;
 }
 
 <link rel="stylesheet" href="~/css/Livros/index.css">
@@ -105,7 +108,21 @@
 							<td>
 								<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detalhes do Livro</a>
 								<br />
-								<button type="button" class="btn btn-danger">Adicionar ao carrinho</button>
+								@if (vendedor != true && SignInManager.IsSignedIn(User))
+								{
+									<form asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-idLivro="@item.Id" method="POST">
+										<input type="hidden" name="LivrosIds" value="@item.Id" />
+										<input type="hidden" name="IdUsuario" value="@idUsuario">
+										<button type="submit" class="btn btn-style">Adicionar ao carrinho</button>
+									</form>
+								}
+								else
+								{
+									if (vendedor == false || vendedor == null)
+									{
+										<a class="btn btn-style" asp-area="Identity" asp-page="/Account/Login">Adicionar ao carrinho</a>
+									}
+								}
 							</td>
 						}
 					}
@@ -114,7 +131,21 @@
 						<td>
 							<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Detalhes do Livro</a>
 							<br />
-							<button type="button" class="btn btn-danger">Adicionar ao carrinho</button>
+							@if (vendedor != true && SignInManager.IsSignedIn(User))
+								{
+									<form asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-idLivro="@item.Id" method="POST">
+										<input type="hidden" name="LivrosIds" value="@item.Id" />
+										<input type="hidden" name="IdUsuario" value="@idUsuario">
+										<button type="submit" class="btn btn-style">Adicionar ao carrinho</button>
+									</form>
+								}
+								else
+								{
+									if (vendedor == false || vendedor == null)
+									{
+										<a class="btn btn-style" asp-area="Identity" asp-page="/Account/Login">Adicionar ao carrinho</a>
+									}
+								}
 						</td>
 					}
 				</tr>

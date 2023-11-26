@@ -31,8 +31,10 @@ namespace Livraria.Controllers
 					if (usuario != null)
 					{
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
+						string? idUsuario = usuario?.Id;
 						bool? vendedor = usuario.Vendedor;
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
+						ViewData["IdUsuario"] = idUsuario;
 						ViewData["Vendedor"] = vendedor;
 					}
 				}

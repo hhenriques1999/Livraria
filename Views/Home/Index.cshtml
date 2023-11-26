@@ -1,7 +1,12 @@
-﻿@{
-	ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Usuario> SignInManager
+
+@{
+	ViewData["Title"] = "Home";
 	var livrosMaisVendidos = ViewData["LivrosMaisVendidos"] as List<Livro>;
 	var melhoresAvaliados = ViewData["MelhoresAvaliados"] as List<Livro>;
+	var idUsuario = ViewData["IdUsuario"] as string;
+	bool? vendedor = ViewData["Vendedor"] as bool?;
 }
 
 <link rel="stylesheet" href="~/css/home.css" />
@@ -23,9 +28,24 @@
 							<h5 class="card-title" style="height: 50%; text-overflow: ellipsis">@livro.Nome</h5>
 							<p class="card-text">@livro.Autor</p>
 							<p class="card-text">Vendas: @livro.QtdVendas</p>
-							<div class="mt-auto">
-								<p class="card-text">Preço: R$ @livro.Preco</p>
-								<a href="@Url.Action("Details", "Livros", new { id = livro.Id })" class="btn btn-primary stretched-link">Ver Item</a>
+							<p class="card-text">Preço: R$ @livro.Preco</p>
+							<div class="d-flex flex-column gap-2">
+								<a href="@Url.Action("Details", "Livros", new { id = livro.Id })" class="btn btn-primary">Ver Livro</a>
+								@if (vendedor != true && SignInManager.IsSignedIn(User))
+								{
+									<form asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-idLivro="@livro.Id" method="POST">
+										<input type="hidden" name="LivrosIds" value="@livro.Id" />
+										<input type="hidden" name="IdUsuario" value="@idUsuario">
+										<button type="submit" class="btn btn-style">Adicionar ao carrinho</button>
+									</form>
+								}
+								else
+								{
+									if (vendedor == false || vendedor == null)
+									{
+										<a class="btn btn-style" asp-area="Identity" asp-page="/Account/Login">Adicionar ao carrinho</a>
+									}
+								}
 							</div>
 						</div>
 					</div>
@@ -48,7 +68,6 @@
 							<div class="card-body d-flex flex-column">
 								<h5 class="card-title" style="height: 50%; text-overflow: ellipsis">@livro.Nome</h5>
 								<p class="card-text">@livro.Autor</p>
-								<p class="card-text">Vendas: @livro.QtdVendas</p>
 								@if (livro.Avaliacoes != null)
 								{
 									if (livro.Avaliacoes.Count != 0)
@@ -61,9 +80,25 @@
 
 									}
 								}
-								<div class="mt-auto">
-									<p class="card-text">Preço: R$ @livro.Preco</p>
-									<a href="@Url.Action("Details", "Livros", new { id = livro.Id })" class="btn btn-primary stretched-link">Ver Item</a>
+								<p class="card-text">Vendas: @livro.QtdVendas</p>
+								<p class="card-text">Preço: R$ @livro.Preco</p>
+								<div class="d-flex flex-column gap-2">
+									<a href="@Url.Action("Details", "Livros", new { id = livro.Id })" class="btn btn-primary">Ver Livro</a>
+									@if (vendedor != true && SignInManager.IsSignedIn(User))
+									{
+										<form asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-idLivro="@livro.Id" method="POST">
+											<input type="hidden" name="LivrosIds" value="@livro.Id" />
+											<input type="hidden" name="IdUsuario" value="@idUsuario">
+											<button type="submit" class="btn btn-style">Adicionar ao carrinho</button>
+										</form>
+									}
+									else
+									{
+										if (vendedor == false || vendedor == null)
+										{
+											<a class="btn btn-style" asp-area="Identity" asp-page="/Account/Login">Adicionar ao carrinho</a>
+										}
+									}
 								</div>
 							</div>
 						</div>

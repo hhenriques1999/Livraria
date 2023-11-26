@@ -116,6 +116,8 @@ namespace Livraria.Controllers
 							livrosdoCarrinho.Add(livroAtual);
 						}
 					}
+
+					livrosdoCarrinho = livrosdoCarrinho.OrderBy(l => l.Nome).ToList();
 					carrinho.Livros = livrosdoCarrinho;
 				}
 				return View(carrinho);
