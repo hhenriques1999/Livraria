@@ -23,6 +23,21 @@ namespace Livraria.Controllers
 		// GET: Livros
 		public async Task<IActionResult> Index()
 		{
+			if (HttpContext.User.Identity != null)
+			{
+				if (HttpContext.User.Identity.IsAuthenticated)
+				{
+					var usuario = _context.Users.FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name);
+					if (usuario != null)
+					{
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+						bool? vendedor = usuario.Vendedor;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+						ViewData["Vendedor"] = vendedor;
+					}
+				}
+			}
+
 			return _context.Livros != null ?
 						View(await _context.Livros.ToListAsync()) :
 						Problem("Entity set 'LivrariaDbContext.Livros'  is null.");
@@ -35,8 +50,17 @@ namespace Livraria.Controllers
 			{
 				if (HttpContext.User.Identity.IsAuthenticated)
 				{
-					string idUsuario = _context.Users.FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name).Id;
-					ViewData["IdUsuario"] = idUsuario;
+					var usuario = _context.Users.FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name);
+					if (usuario != null)
+					{
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+						string? idUsuario = usuario?.Id;
+						bool? vendedor = usuario.Vendedor;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+						ViewData["IdUsuario"] = idUsuario;
+						ViewData["Vendedor"] = vendedor;
+					}
+					
 				}
 			}
 
