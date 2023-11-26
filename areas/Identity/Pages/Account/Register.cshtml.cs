@@ -116,6 +116,7 @@ namespace Livraria.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 user.Vendedor = Input.Vendedor;
+                user.Nome = Input.Nome;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
