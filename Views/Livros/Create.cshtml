@@ -4,55 +4,53 @@
 	ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Livro</h4>
-<hr />
-<div class="row">
-	<div class="col-md-4">
-		<form asp-action="Create">
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<div class="form-group">
-				<label asp-for="Nome" class="control-label"></label>
-				<input asp-for="Nome" class="form-control" />
-				<span asp-validation-for="Nome" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="Autor" class="control-label"></label>
-				<input asp-for="Autor" class="form-control" />
-				<span asp-validation-for="Autor" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="Preco" class="control-label"></label>
-				<input asp-for="Preco" class="form-control" />
-				<span asp-validation-for="Preco" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="QtdVendas" class="control-label"></label>
-				<input asp-for="QtdVendas" class="form-control" />
-				<span asp-validation-for="QtdVendas" class="text-danger"></span>
-			</div>
-
-			<div class="form-group">
-				<label for="imageUpload" class="control-label">Upload Image</label>
-				<input type="file" id="imageUpload" accept="image/*" />
-				<input type="hidden" asp-for="Capa" id="base64Image" />
-			</div>
-
-			<!-- Display Resized Image -->
-			<div class="form-group">
-				<img id="resizedImage" src="#" alt="Resized Image" style="max-width:160px; max-height:220px;" />
-			</div>
-
-			<div class="form-group">
-				<input type="submit" value="Create" class="btn btn-primary" />
-			</div>
-		</form>
+<div class="container">
+	<h3>Adicionar Novo Livro</h3>
+	<hr />
+		<div class="col-md-4">
+			<form asp-action="Create">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<div class="form-group">
+					<label asp-for="Nome" class="control-label"></label>
+					<input asp-for="Nome" class="form-control" />
+					<span asp-validation-for="Nome" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Autor" class="control-label"></label>
+					<input asp-for="Autor" class="form-control" />
+					<span asp-validation-for="Autor" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Preco" class="control-label"></label>
+					<input asp-for="Preco" class="form-control" />
+					<span asp-validation-for="Preco" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="QtdVendas" class="control-label"></label>
+					<input asp-for="QtdVendas" class="form-control" />
+					<span asp-validation-for="QtdVendas" class="text-danger"></span>
+				</div>
+	
+				<div class="form-group">
+					<label for="imageUpload" class="control-label">Upload Image</label>
+					<input type="file" id="imageUpload" accept="image/*" />
+					<input type="hidden" asp-for="Capa" id="base64Image" />
+				</div>
+	
+				<!-- Display Resized Image -->
+				<div class="form-group">
+					<img id="resizedImage" src="#" alt="Resized Image" style="max-width:160px; max-height:220px;" />
+				</div>
+	
+				<div class="form-group">
+					<input type="submit" value="Adicionar" class="btn btn-primary" />
+				</div>
+			</form>
+		</div>
+	
+	<div>
+		<a asp-action="Index">Voltar a listagem</a>
 	</div>
-</div>
-
-<div>
-	<a asp-action="Index">Back to List</a>
 </div>
 
 <script src="~/js/Livros/create.js" asp-append-version="true" />

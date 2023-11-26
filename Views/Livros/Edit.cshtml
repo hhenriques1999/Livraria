@@ -6,11 +6,9 @@
 
 <script src="~/js/Livros/edit.js"></script>
 
-<h1>Editar</h1>
-
-<h4>Livro</h4>
-<hr />
-<div class="row">
+<div class="container">
+	<h3>Editar Livro</h3>
+	<hr />
 	<div class="col-md-4">
 		<form asp-action="Edit" method="post" enctype="multipart/form-data">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -36,13 +34,11 @@
 				<span asp-validation-for="QtdVendas" class="text-danger"></span>
 			</div>
 
-			<!-- Current Cover Image -->
 			<div class="form-group">
 				<label>Capa Atual</label>
 				<img id="resizedImage" src="@Model.Capa" alt="Capa do Livro" style="max-width:160px; max-height:220px;" />
 			</div>
 
-			<!-- File Input for New Cover Image -->
 			<div class="form-group">
 				<label for="imageUpload" class="control-label">Upload New Cover Image</label>
 				<input type="file" id="imageUpload" name="Capa" accept="image/*" />
@@ -54,10 +50,10 @@
 			</div>
 		</form>
 	</div>
-</div>
 
-<div>
-	<a asp-action="Index">Back to List</a>
+	<div>
+		<a asp-action="Index">Back to List</a>
+	</div>
 </div>
 
 @section Scripts {

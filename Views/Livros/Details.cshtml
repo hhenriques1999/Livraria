@@ -39,27 +39,42 @@
 				<h3>Avaliações:</h3>
 				@if (Model.Avaliacoes != null)
 				{
-					foreach (var avaliacao in Model.Avaliacoes)
+					if (Model.Avaliacoes.Count() > 0)
 					{
-						<div class="rating">
-							<p>Usuário: @avaliacao.Avaliador?.Nome</p>
-							<p>Avaliação: @avaliacao.Estrelas estrelas</p>
-							<p>Comentário: @avaliacao.Comentario</p>
-						</div>
-
-						@if (SignInManager.IsSignedIn(User))
+						foreach (var avaliacao in Model.Avaliacoes)
 						{
-							if (vendedor != null)
+							<div class="rating">
+								<p>Usuário: @avaliacao.Avaliador?.Nome</p>
+								<p>Avaliação: @avaliacao.Estrelas estrelas</p>
+								<p>Comentário: @avaliacao.Comentario</p>
+							</div>
+
+							@if (SignInManager.IsSignedIn(User))
 							{
-								if (vendedor == true)
+								if (vendedor != null)
 								{
-									<form asp-action="Delete" asp-route-id="@avaliacao.Id" asp-controller="Avaliacaos" method="POST">
-										<button type="submit" class="btn btn-style">Remover Avaliação</button>
-									</form>
+									if (vendedor == true)
+									{
+										<form asp-action="Delete" asp-route-id="@avaliacao.Id" asp-controller="Avaliacaos" method="POST">
+											<button type="submit" class="btn btn-style">Remover Avaliação</button>
+										</form>
+									}
 								}
 							}
 						}
 					}
+					else
+					{
+						<div class="rating">
+							Não há avaliações para esse livro!
+						</div>
+					}
+				}
+				else
+				{
+					<div class="rating">
+						Não há avaliações para esse livro!
+					</div>
 				}
 			</div>
 		</div>
@@ -70,7 +85,7 @@
 		if (vendedor == true)
 		{
 			<div class="submit-rating">
-				<h3>Vendedores não avaliam livros</h3>
+				<h3>Como vendedor, você não pode avaliar um livro.</h3>
 			</div>
 		}
 		else
