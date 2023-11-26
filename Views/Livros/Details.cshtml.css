@@ -1,0 +1,90 @@
+﻿.book-details-page {
+    margin-top: 6vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This will center the child divs horizontally */
+}
+
+.book-details {
+    width: 50vw;
+    display: flex;
+    border: 1px solid #ddd;
+    padding: 20px;
+    justify-content: center;
+}
+
+.submit-rating {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    justify-content: center;
+    width: 50vw;
+}
+
+.stars {
+    direction: rtl; /* Right to left to enable proper star highlighting */
+    font-size: 24px;
+    color: #ddd; /* Default color */
+}
+
+    .stars input[type="radio"] {
+        display: none;
+    }
+
+    .stars label {
+        cursor: pointer;
+        color: #ffd700; /* Gold color for stars */
+    }
+
+        .stars label:hover,
+        .stars label:hover ~ label,
+        .stars input[type="radio"]:checked ~ label {
+            color: #ffed85; /* Lighter gold color on hover */
+        }
+
+textarea {
+    width: 100%;
+    margin-top: 10px;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+
+.book-cover img {
+    max-width: 200px;
+    margin-right: 20px;
+}
+
+.book-info h2 {
+    margin-top: 0;
+}
+
+#addToCartBtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+    #addToCartBtn:hover {
+        background-color: #45a049;
+    }
+
+.rating-section {
+    margin-top: 20px;
+}
+
+.rating {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
