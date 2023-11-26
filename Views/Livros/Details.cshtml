@@ -1,9 +1,12 @@
-﻿@model Livraria.Models.Livro
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Usuario> SignInManager
+
+@model Livraria.Models.Livro
 
 @{
 	ViewData["Title"] = "Details";
+	string IdUsuario = ViewData["IdUsuario"] as string;
 }
-
 <div class="book-details-page">
 	<div class="book-details">
 		<div class="book-cover">
@@ -15,7 +18,14 @@
 			<p>Preço: <strong>R$ @Model.Preco</strong></p>
 			<p>Vendas: @Model.QtdVendas</p>
 
-			<button class="btn" id="addToCartBtn" onclick="addToCart(@Model.Id)">Adicionar ao carrinho</button>
+			@if (SignInManager.IsSignedIn(User))
+			{
+				<a class="btn btn-style">Adicionar ao carrinho</a>
+			}
+			else
+			{
+				<a class="btn btn-style" asp-area="Identity" asp-page="/Account/Login">Adicionar ao carrinho</a>
+			}
 
 			<div class="rating-section">
 				<h3>Avaliações:</h3>
@@ -34,23 +44,33 @@
 		</div>
 	</div>
 	<hr />
-	<div class="submit-rating">
-		<h3>Faça a sua avaliação</h3>
-		<form asp-action="AdicionarAvaliacao" asp-route-id="@Model.Id" method="post">
-			<input type="hidden" name="LivroId" value="@Model.Id" />
+	@if (SignInManager.IsSignedIn(User))
+	{
+		<div class="submit-rating">
+			<h3>Faça a sua avaliação</h3>
+			<form asp-action="AdicionarAvaliacao" asp-route-id="@Model.Id" method="post">
+				<input type="hidden" name="IdLivro" value="@Model.Id" />
+				<input type="hidden" name="IdUsuario" value="@IdUsuario" />
 
-			<div class="stars">
-				@for (int i = 1; i <= 5; i++)
-				{
-					<input type="radio" name="Estrelas" id="star-@i" value="@i" />
-					<label for="star-@i">&#9733;</label>
-				}
-			</div>
+				<div class="stars">
+					@for (int i = 1; i <= 5; i++)
+					{
+						<input type="radio" name="Estrelas" id="star-@i" value="@i" />
+						<label for="star-@i">&#9733;</label>
+					}
+				</div>
 
-			<textarea class="form-control" name="Comentario" placeholder="Adicione um comentário..."></textarea>
-			<button type="submit" class="btn">Enviar avaliação</button>
-		</form>
-	</div>
+				<textarea class="form-control" name="Comentario" placeholder="Adicione um comentário..."></textarea>
+				<button type="submit" class="btn btn-style">Enviar avaliação</button>
+			</form>
+		</div>
+	}
+	else
+	{
+		<div class="submit-rating">
+			<h3>Você precisa estar logado para avaliar esse livro!</h3>
+		</div>
+	}
 </div>
 
 @*<div>

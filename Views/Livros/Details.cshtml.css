@@ -48,16 +48,6 @@ textarea {
     margin-top: 10px;
 }
 
-button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-
 .book-cover img {
     max-width: 200px;
     margin-right: 20px;

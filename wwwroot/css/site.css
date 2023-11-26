@@ -16,3 +16,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.btn-style {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+    .btn-style:hover {
+        color: white;
+        background-color: #2C8F30;
+    }

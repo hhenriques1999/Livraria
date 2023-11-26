@@ -14,7 +14,6 @@
 				<input id="search-input" class="header-input" type="text" name="input" placeholder="Nome do livro...">
 			</div>
 			<div class="header-navigation">
-				<a asp-action="SobreNos" asp-controller="Home"><i class="fa fa-question-circle"></i><br />Sobre Nós</a>
 				@if (!SignInManager.IsSignedIn(User))
 				{
 					<a asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-user" aria-hidden="true"></i><br>Login</a>
@@ -22,7 +21,7 @@
 				}
 				else
 				{
-					<div>Seja bem-vindo, @User.Identity.Name</div>
+					<div><b>Seja bem-vindo</b>,<br />@User.Identity.Name</div>
 				}
 				<a href="carrinho.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br>Carrinho</a>
 				@if (SignInManager.IsSignedIn(User))
@@ -31,6 +30,7 @@
 						<button class="btn" type="submit"><i class="fa fa-user-circle-o" aria-hidden="true"></i><br>Sair</button>
 					</form>
 				}
+				<a asp-action="SobreNos" asp-controller="Home"><i class="fa fa-question-circle"></i><br />Sobre Nós</a>
 			</div>
 		</div>
 	</div>
