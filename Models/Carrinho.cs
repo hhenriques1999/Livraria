@@ -14,6 +14,6 @@ namespace Livraria.Models
 		public string IdUsuario { get; set; }
 
 		[ForeignKey(nameof(IdUsuario))]
-		public virtual Usuario Usuario { get; set; }
+		public virtual Usuario? Usuario { get; set; }
 	}
 }

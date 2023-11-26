@@ -1,0 +1,20 @@
+﻿@model Livraria.Models.Carrinho
+@{
+}
+
+<div class="container">
+	@if (Model.Livros != null)
+	{
+		if (Model.Livros.Count() != 0)
+		{
+			foreach (var livro in Model.Livros)
+			{
+				<div>Livro: @livro.Id | @livro.Nome</div>
+			}
+		}
+		else
+		{
+			<div>O seu carrinho está vazio ;(</div>
+		}
+	}
+</div>
