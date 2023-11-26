@@ -55,6 +55,14 @@ namespace Livraria.Controllers
 
 			var avaliacoesLivro = _context.Avaliacao.Where(a => a.IdLivro == livro.Id).ToList();
 
+			foreach (var avaliacao in avaliacoesLivro)
+			{
+				if (!string.IsNullOrEmpty(avaliacao.IdUsuario))
+				{
+					avaliacao.Avaliador = _context.Users.FirstOrDefault(u => u.Id == avaliacao.IdUsuario);
+				}
+			}
+
 			livro.Avaliacoes = avaliacoesLivro;
 
 			return View(livro);

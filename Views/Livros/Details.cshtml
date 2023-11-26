@@ -34,9 +34,9 @@
 					foreach (var avaliacao in Model.Avaliacoes)
 					{
 						<div class="rating">
-							<p>User: @avaliacao.Avaliador?.Nome</p>
-							<p>Rating: @avaliacao.Estrelas</p>
-							<p>Comment: @avaliacao.Comentario</p>
+							<p>Usuário: @avaliacao.Avaliador.Nome</p>
+							<p>Avaliação: @avaliacao.Estrelas estrelas</p>
+							<p>Comentário: @avaliacao.Comentario</p>
 						</div>
 					}
 				}
