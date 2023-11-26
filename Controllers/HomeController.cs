@@ -31,6 +31,7 @@ namespace Livraria.Controllers
                         bool? vendedor = usuario.Vendedor;
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
                         ViewData["IdUsuario"] = idUsuario;
+                        ViewData["Vendedor"] = vendedor;
                     }
                 }
             }
@@ -43,7 +44,24 @@ namespace Livraria.Controllers
 
         public IActionResult SobreNos()
         {
-            return View();
+			if (HttpContext.User.Identity != null)
+			{
+				if (HttpContext.User.Identity.IsAuthenticated)
+				{
+					var usuario = _context.Users.FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name);
+					if (usuario != null)
+					{
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+						string? idUsuario = usuario?.Id;
+						bool? vendedor = usuario.Vendedor;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+						ViewData["IdUsuario"] = idUsuario;
+                        ViewData["Vendedor"] = vendedor;
+					}
+				}
+			}
+
+			return View();
         }
 
         public IActionResult Privacy()
