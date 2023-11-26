@@ -12,6 +12,23 @@
     justify-content: space-evenly;
 }
 
+.card-img-top {
+    height: 30vh;
+    object-fit: contain;
+    width: 11vw;
+    align-self: center;
+}
+
+.card {
+    width: 13vw;
+    min-width: 200px;
+}
+
+.card-title {
+    height: 25%;
+    text-overflow: ellipsis;
+}
+
     .secondary-header p {
         margin: 0;
         color: white;
@@ -33,13 +50,19 @@
     margin-top: 5vh;
 }
 
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
 .book-carrousel {
     width: 100%;
     background-color: rgb(237 235 235);
     border-radius: 20px;
     display: flex;
-    padding: 5vh;
-    justify-content: space-around;
+    padding: 2vh;
+    gap: 1vw;
 }
 
 .book-container {

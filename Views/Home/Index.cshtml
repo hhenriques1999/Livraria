@@ -17,19 +17,19 @@
 	</div>
 	<div class="container-livros">
 		<h3>Mais Vendidos</h3>
-		<div class="book-carrousel h-100">
+		<div class="book-carrousel">
 			@if (livrosMaisVendidos != null)
 			{
 				@foreach (var livro in livrosMaisVendidos)
 				{
-					<div class="card h-100" style="width: 10vw; ">
-						<img src="@livro.Capa" class="card-img-top" alt="@livro.Nome" style="width: 10vw; height: 15vh; object-fit: contain">
-						<div class="card-body d-flex flex-column">
-							<h5 class="card-title" style="height: 50%; text-overflow: ellipsis">@livro.Nome</h5>
+					<div class="card">
+						<img src="@livro.Capa" class="card-img-top" alt="@livro.Nome">
+						<div class="card-body">
+							<h5 class="card-title">@livro.Nome</h5>
 							<p class="card-text">@livro.Autor</p>
 							<p class="card-text">Vendas: @livro.QtdVendas</p>
 							<p class="card-text">Preço: R$ @livro.Preco</p>
-							<div class="d-flex flex-column gap-2">
+							<div class="button-container">
 								<a href="@Url.Action("Details", "Livros", new { id = livro.Id })" class="btn btn-primary">Ver Livro</a>
 								@if (vendedor != true && SignInManager.IsSignedIn(User))
 								{
@@ -63,10 +63,10 @@
 				{
 					foreach (var livro in melhoresAvaliados)
 					{
-						<div class="card h-100" style="width: 10vw;">
-							<img src="@livro.Capa" class="card-img-top" alt="@livro.Nome" style="width: 10vw; height: 15vh; object-fit: contain">
-							<div class="card-body d-flex flex-column">
-								<h5 class="card-title" style="height: 50%; text-overflow: ellipsis">@livro.Nome</h5>
+						<div class="card">
+							<img src="@livro.Capa" class="card-img-top" alt="@livro.Nome">
+							<div class="card-body">
+								<h5 class="card-title">@livro.Nome</h5>
 								<p class="card-text">@livro.Autor</p>
 								@if (livro.Avaliacoes != null)
 								{
@@ -82,7 +82,7 @@
 								}
 								<p class="card-text">Vendas: @livro.QtdVendas</p>
 								<p class="card-text">Preço: R$ @livro.Preco</p>
-								<div class="d-flex flex-column gap-2">
+								<div class="button-container">
 									<a href="@Url.Action("Details", "Livros", new { id = livro.Id })" class="btn btn-primary">Ver Livro</a>
 									@if (vendedor != true && SignInManager.IsSignedIn(User))
 									{

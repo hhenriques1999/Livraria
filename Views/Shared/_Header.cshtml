@@ -26,7 +26,7 @@
                     }
                     else
                     {
-                        <li class="nav-item"><a class="nav-link disabled">Bem-vindo, @User.Identity.Name</a></li>
+                        <li class="nav-item"><a class="nav-link disabled text-dark">Bem-vindo, @User.Identity.Name</a></li>
                         if (vendedor != true)
                         {
                             <li class="nav-item"><a class="nav-link" asp-controller="Carrinho" asp-action="VerCarrinho" asp-route-idUsuario="@idUsuario"><i class="fa fa-shopping-cart"></i> Carrinho</a></li>
