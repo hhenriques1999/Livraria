@@ -31,8 +31,14 @@ namespace Livraria.Controllers
 		// GET: Livros/Details/5
 		public async Task<IActionResult> Details(int? id)
 		{
-			//string idUsuario = _context.Users.FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name).Id;
-			//ViewData["IdUsuario"] = idUsuario;
+			if (HttpContext.User.Identity != null)
+			{
+				if (HttpContext.User.Identity.IsAuthenticated)
+				{
+					string idUsuario = _context.Users.FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name).Id;
+					ViewData["IdUsuario"] = idUsuario;
+				}
+			}
 
 			if (id == null || _context.Livros == null)
 			{
@@ -41,10 +47,15 @@ namespace Livraria.Controllers
 
 			var livro = await _context.Livros
 				.FirstOrDefaultAsync(m => m.Id == id);
+
 			if (livro == null)
 			{
 				return NotFound();
 			}
+
+			var avaliacoesLivro = _context.Avaliacao.Where(a => a.IdLivro == livro.Id).ToList();
+
+			livro.Avaliacoes = avaliacoesLivro;
 
 			return View(livro);
 		}
@@ -130,10 +141,15 @@ namespace Livraria.Controllers
 		}
 
 		[HttpPost("/Livros/AdicionarAvaliacao/{id}")]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> AdicionarAvaliacao(int? id, [Bind("Estrelas, Comentario, IdUsuario, IdLivro")] Avaliacao avaliacao)
 		{
-			if (id == null)
+			if (id == null || avaliacao == null)
 			{
+				if (string.IsNullOrEmpty(avaliacao?.IdUsuario))
+				{
+					return NotFound();
+				}
 				return NotFound();
 			}
 
@@ -156,6 +172,8 @@ namespace Livraria.Controllers
 					else
 					{
 						livro.Avaliacoes = new List<Avaliacao> { avaliacao };
+						await _context.SaveChangesAsync();
+						return RedirectToAction(nameof(Details), new { id });
 					}
 				}
 				else
